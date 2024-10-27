@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Predicciones
+{% endblock %}
+
+{% block body %}
+<div class="predicciones-container">
+    <h1>Predicciones</h1>
+    <form id="prediccion-form">
+        <label for="input1">Entrada 1:</label>
+        <input type="text" id="input1" name="input1" required>
+
+        <label for="input2">Entrada 2:</label>
+        <input type="text" id="input2" name="input2" required>
+
+        <button type="submit">Realizar Predicción</button>
+    </form>
+
+    <div id="resultado-prediccion" class="resultado">
+        <!-- Aquí se mostrará el resultado de la predicción -->
+    </div>
+</div>
+
+<script>
+    document.getElementById('prediccion-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
+
+        // Obtener los valores de entrada
+        const input1 = document.getElementById('input1').value;
+        const input2 = document.getElementById('input2').value;
+
+        // Realizar la llamada a la API o al backend para obtener la predicción
+        fetch('/api/prediccion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input1: input1, input2: input2 })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mostrar el resultado en el div correspondiente
+            document.getElementById('resultado-prediccion').innerText = 'Predicción: ' + data.resultado;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+<style>
+    .predicciones-container {
+        margin: 20px;
+    }
+    .resultado {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
