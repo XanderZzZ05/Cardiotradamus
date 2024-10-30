@@ -8,11 +8,44 @@ Predicciones
 <div class="predicciones-container">
     <h1>Predicciones</h1>
     <form id="prediccion-form">
-        <label for="input1">Entrada 1:</label>
-        <input type="text" id="input1" name="input1" required>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" name="edad" required>
 
-        <label for="input2">Entrada 2:</label>
-        <input type="text" id="input2" name="input2" required>
+        <label for="sexo">Sexo:</label>
+        <input type="text" id="sexo" name="sexo" required>
+
+        <label for="tipo_dolor">Tipo de dolor en el pecho:</label>
+        <input type="text" id="tipo_dolor" name="tipo_dolor" required>
+
+        <label for="presion_arterial">Presión arterial:</label>
+        <input type="text" id="presion_arterial" name="presion_arterial" required>
+
+        <label for="colesterol">Colesterol:</label>
+        <input type="text" id="colesterol" name="colesterol" required>
+
+        <label for="azucar_sangre">Azúcar en sangre:</label>
+        <input type="text" id="azucar_sangre" name="azucar_sangre" required>
+
+        <label for="resultados_ecg">Resultados ECG:</label>
+        <input type="text" id="resultados_ecg" name="resultados_ecg" required>
+
+        <label for="frecuencia_cardiaca_maxima">Frecuencia cardiaca máxima:</label>
+        <input type="text" id="frecuencia_cardiaca_maxima" name="frecuencia_cardiaca_maxima" required>
+
+        <label for="angina_inducida">Angina inducida:</label>
+        <input type="text" id="angina_inducida" name="angina_inducida" required>
+
+        <label for="depresion_st">Depresión ST:</label>
+        <input type="text" id="depresion_st" name="depresion_st" required>
+
+        <label for="pendiente_st_ejercicio">Pendiente ST ejercicio:</label>
+        <input type="text" id="pendiente_st_ejercicio" name="pendiente_st_ejercicio" required>
+
+        <label for="vasos_principales_fluroscopia">Vasos principales fluoroscopia:</label>
+        <input type="text" id="vasos_principales_fluroscopia" name="vasos_principales_fluroscopia" required>
+
+        <label for="talasemia">Talasemia:</label>
+        <input type="text" id="talasemia" name="talasemia" required>
 
         <button type="submit">Realizar Predicción</button>
     </form>
@@ -26,9 +59,22 @@ Predicciones
     document.getElementById('prediccion-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Evitar el envío del formulario
 
-        // Obtener los valores de entrada
-        const input1 = document.getElementById('input1').value;
-        const input2 = document.getElementById('input2').value;
+        // Crear un objeto para almacenar los valores de entrada
+        const inputs = {
+            edad: document.getElementById('edad').value,
+            sexo: document.getElementById('sexo').value,
+            tipo_dolor: document.getElementById('tipo_dolor').value,
+            presion_arterial: document.getElementById('presion_arterial').value,
+            colesterol: document.getElementById('colesterol').value,
+            azucar_sangre: document.getElementById('azucar_sangre').value,
+            resultados_ecg: document.getElementById('resultados_ecg').value,
+            frecuencia_cardiaca_maxima: document.getElementById('frecuencia_cardiaca_maxima').value,
+            angina_inducida: document.getElementById('angina_inducida').value,
+            depresion_st: document.getElementById('depresion_st').value,
+            pendiente_st_ejercicio: document.getElementById('pendiente_st_ejercicio').value,
+            vasos_principales_fluroscopia: document.getElementById('vasos_principales_fluroscopia').value,
+            talasemia: document.getElementById('talasemia').value
+        };
 
         // Realizar la llamada a la API o al backend para obtener la predicción
         fetch('/api/prediccion', {
@@ -36,12 +82,12 @@ Predicciones
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input1: input1, input2: input2 })
+            body: JSON.stringify(inputs)
         })
         .then(response => response.json())
         .then(data => {
-            // Mostrar el resultado en el div correspondiente
-            document.getElementById('resultado-prediccion').innerText = 'Predicción: ' + data.resultado;
+                        // Mostrar el resultado en el div correspondiente
+                        document.getElementById('resultado-prediccion').innerText = 'Predicción: ' + data.resultado;
         })
         .catch(error => {
             console.error('Error:', error);

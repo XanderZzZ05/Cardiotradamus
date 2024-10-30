@@ -1,36 +1,19 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 import joblib
-
+import os
 app=Flask(__name__)
 
-modelo=joblib.load('C:/Users/Vivia/OneDrive/Escritorio/CARDIOTRADAMUS/app/modelo/modelo_knn.pkl')
+modelo_path = os.path.join(os.path.dirname(__file__), 'modelo', 'modelo_knn.pkl')
+modelo = joblib.load(modelo_path)
 
 @app.route('/')
 def index():
-    cursos=[1,2,3,4,5,6]
-    data={
-        'titulo':'index123',
-        'bienvenida':'saludos',
-        'cursos': cursos,
-        'numero_cursos':len(cursos)
-    }
-    return render_template('index.html', data=data)
+    return render_template('index.html')
 
 @app.route('/predicciones', methods=['GET', 'POST'])
-def predict():
+def predicciones():
     return render_template('prediccion.html')  # Página de predicciones
 
-"""@app.route('/api/prediccion', methods=['POST'])
-def realizar_prediccion():
-    data = request.get_json()
-    input1 = data.get('input1')
-    input2 = data.get('input2')
-    
-    # Aquí iría la lógica para realizar la predicción
-    resultado = "Resultado de la predicción"  # Reemplaza esto con tu lógica
-
-    return jsonify({'resultado': resultado})
-"""
 def pag_no_encontrada(error):
     return render_template('404.html'), 404
 
