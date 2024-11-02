@@ -1,3 +1,85 @@
-body{
-    background-color: aqua;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3; /* Fondo gris claro */
+    color: #000000; /* Texto negro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.predicciones-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px 40px; /* Ajustar padding para mantener todo alineado */
+    background-color: #f2d0a4; /* Fondo beige para el formulario */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Título */
+.predicciones-container h1 {
+    text-align: center;
+    color: #3b3b3b; /* Tono gris oscuro para el título */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario */
+form label {
+    font-weight: bold;
+    color: #333333; /* Gris oscuro para las etiquetas */
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    display: block;
+    background-color: #f3e3d3; /* Beige claro para los campos de texto */
+    color: #3b3b3b; /* Gris oscuro para el texto de entrada */
+    border: 1px solid #b0a295; /* Borde gris suave */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form input[type="text"]::placeholder {
+    color: #8a7d73; /* Gris para el texto de marcador */
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 10px; /* Mismo padding que los campos de texto */
+    background-color: #ffad60; /* Naranja suave para el botón */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Ajusta para respetar ancho */
+    margin-top: 8px; /* Separación con el último campo */
+}
+
+form button[type="submit"]:hover {
+    background-color: #e69553; /* Naranja más oscuro al pasar el ratón */
+}
+
+/* Estilos del resultado */
+.resultado {
+    background-color: #f3e3d3; /* Fondo beige claro para la sección de resultados */
+    padding: 15px;
+    border-radius: 4px;
+    color: #333333; /* Texto en gris oscuro */
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Ajuste del texto */
+.resultado p {
+    margin: 0;
 }
