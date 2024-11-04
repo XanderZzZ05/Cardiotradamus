@@ -11,48 +11,55 @@ Predicciones
         <label for="edad">Edad:</label>
         <input type="text" id="edad" name="edad" required>
 
-        <label for="sexo">Sexo:</label>
+        <label for="sexo">Sexo (0 = Mujer, 1 = Hombre):</label>
         <input type="text" id="sexo" name="sexo" required>
 
-        <label for="tipo_dolor">Tipo de dolor en el pecho:</label>
+        <label for="tipo_dolor">Tipo de dolor en el pecho (0 = Angina típica, 1 = Angina atípica, 2 = Dolor no anginoso, 3 = Asintomático.):</label>
         <input type="text" id="tipo_dolor" name="tipo_dolor" required>
 
-        <label for="presion_arterial">Presión arterial:</label>
+        <label for="presion_arterial">Presión arterial (Digite un número entero):</label>
         <input type="text" id="presion_arterial" name="presion_arterial" required>
 
-        <label for="colesterol">Colesterol:</label>
+        <label for="colesterol">Colesterol (Digite un número entero):</label>
         <input type="text" id="colesterol" name="colesterol" required>
 
-        <label for="azucar_sangre">Azúcar en sangre:</label>
+        <label for="azucar_sangre">Azúcar en sangre (0 = Falso, 1 = Verdadero):</label>
         <input type="text" id="azucar_sangre" name="azucar_sangre" required>
 
-        <label for="resultados_ecg">Resultados ECG:</label>
+        <label for="resultados_ecg">Resultados ECG (0 = Normal, 1 = Anomalía de la onda ST-T, 2 = Hipertrofia ventricular izquierda):</label>
         <input type="text" id="resultados_ecg" name="resultados_ecg" required>
 
-        <label for="frecuencia_cardiaca_maxima">Frecuencia cardiaca máxima:</label>
+        <label for="frecuencia_cardiaca_maxima">Frecuencia cardiaca máxima (Digite un número entero):</label>
         <input type="text" id="frecuencia_cardiaca_maxima" name="frecuencia_cardiaca_maxima" required>
 
-        <label for="angina_inducida">Angina inducida:</label>
+        <label for="angina_inducida">Angina inducida (0 = No, 1 = Si):</label>
         <input type="text" id="angina_inducida" name="angina_inducida" required>
 
-        <label for="depresion_st">Depresión ST:</label>
+        <label for="depresion_st">Depresión ST (Puede ser un valor decimal):</label>
         <input type="text" id="depresion_st" name="depresion_st" required>
 
-        <label for="pendiente_st_ejercicio">Pendiente ST ejercicio:</label>
+        <label for="pendiente_st_ejercicio">Pendiente ST ejercicio (0 = Ascendente, 1 = Plana, 2 = Descendente.):</label>
         <input type="text" id="pendiente_st_ejercicio" name="pendiente_st_ejercicio" required>
 
-        <label for="vasos_principales_fluroscopia">Vasos principales fluoroscopia:</label>
+        <label for="vasos_principales_fluroscopia">Vasos principales fluoroscopia (Digite un número entre 0-3):</label>
         <input type="text" id="vasos_principales_fluroscopia" name="vasos_principales_fluroscopia" required>
 
-        <label for="talasemia">Talasemia:</label>
+        <label for="talasemia">Talasemia (0 = No padece, 1 = Normal, 2 = Defecto fijo, 3 = Defecto reversible.):</label>
         <input type="text" id="talasemia" name="talasemia" required>
 
         <button type="submit">Realizar Predicción</button>
     </form>
 
-    <div id="resultado-prediccion" class="resultado">
+    <!-- Div para mostrar el resultado de la predicción -->
+    <div id="resultado-prediccion" class="resultado" style="margin-top: 20px;">
         <!-- Aquí se mostrará el resultado de la predicción -->
     </div>
+
+    <!-- Título y lista de consejos -->
+    <h2 id="titulo-consejos" class="resultado" style="display: none; margin-top: 20px;"></h2>
+    <ul id="consejos" class="resultado" style="display: none;">
+        <!-- Aquí se mostrarán los consejos -->
+    </ul>
 </div>
 
 <script>
@@ -86,11 +93,34 @@ Predicciones
         })
         .then(response => response.json())
         .then(data => {
-                        // Mostrar el resultado en el div correspondiente
-                        document.getElementById('resultado-prediccion').innerText = 'Predicción: ' + data.resultado;
+            // Mostrar el resultado en el div correspondiente
+            document.getElementById('resultado-prediccion').innerText = 'Predicción: ' + data.resultado;
+
+            // Configurar el título y mostrar la lista de consejos
+            const tituloConsejos = document.getElementById('titulo-consejos');
+            const consejosList = document.getElementById('consejos');
+
+            consejosList.innerHTML = ''; // Limpiar la lista de consejos antes de añadir nuevos
+            consejosList.style.display = 'block'; // Mostrar la lista de consejos
+
+            if (data.resultado.includes("presenta un riesgo de problemas cardíacos")) {
+                tituloConsejos.innerText = 'RECOMENDACIONES PARA TRATAR LOS PROBLEMAS CARDIACOS';
+                tituloConsejos.style.display = 'block'; // Mostrar el título
+            } else {
+                tituloConsejos.innerText = 'FELICIDADES, AQUÍ COSAS PARA SEGUIR SANO';
+                tituloConsejos.style.display = 'block'; // Mostrar el título
+            }
+
+            // Añadir los consejos
+            data.consejos.forEach(consejo => {
+                const li = document.createElement('li');
+                li.textContent = consejo;
+                consejosList.appendChild(li);
+            });
         })
         .catch(error => {
             console.error('Error:', error);
+            document.getElementById('resultado-prediccion').innerText = 'Ocurrió un error. Intenta de nuevo.';
         });
     });
 </script>
@@ -100,7 +130,6 @@ Predicciones
         margin: 20px;
     }
     .resultado {
-        margin-top: 20px;
         font-weight: bold;
     }
 </style>

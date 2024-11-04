@@ -43,14 +43,36 @@ def api_prediccion():
         # Realizar la predicción
         prediccion = modelo.predict([input_features])[0]  # Obtener el primer elemento de la predicción
         
-        # Interpretar el resultado
-        if prediccion == 1:
-            resultado = "El paciente presenta un riesgo de problemas cardíacos."
-        else:
-            resultado = "El paciente no presenta riesgo de problemas cardíacos."
+        # Listas de consejos
+        consejos_con_problemas = [
+            "1. Mantén una dieta baja en grasas saturadas y azúcares.",
+            "2. Realiza ejercicio regularmente, al menos 30 minutos al día.",
+            "3. Controla tu presión arterial y colesterol con chequeos regulares.",
+            "4. Evita el consumo de tabaco y alcohol.",
+            "5. Consulta con un médico para un plan de tratamiento adecuado."
+        ]
         
-        # Devolver el resultado interpretado en formato JSON
-        return jsonify({'resultado': resultado})
+        consejos_sin_problemas = [
+            "1. Mantén una dieta equilibrada rica en frutas y verduras.",
+            "2. Haz ejercicio regularmente para mantener tu corazón sano.",
+            "3. Controla tu peso y evita el sobrepeso.",
+            "4. Realiza chequeos médicos de rutina.",
+            "5. Mantén una buena salud mental y maneja el estrés."
+        ]
+        
+        # Interpretar el resultado y proporcionar consejos
+        if prediccion == 1:
+            resultado = "El paciente presenta problemas cardíacos."
+            consejos = consejos_con_problemas
+        elif prediccion == 0:
+            resultado = "El paciente no posee problemas cardíacos."
+            consejos = consejos_sin_problemas
+        else:
+            resultado = "Resultado inesperado."  # Mensaje para cualquier otro resultado (opcional)
+            consejos = []
+
+        # Devolver el resultado e incluir consejos en formato JSON
+        return jsonify({'resultado': resultado, 'consejos': consejos})
 
     except Exception as e:
         # En caso de error, devolver el mensaje de error

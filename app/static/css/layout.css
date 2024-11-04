@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f3f3f3; /* Fondo gris claro */
+    background-color: #e4ded7; /* Fondo gris claro */
     color: #000000; /* Texto negro */
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ body {
     width: 100%;
     margin: 40px auto;
     padding: 20px 40px; /* Ajustar padding para mantener todo alineado */
-    background-color: #f2d0a4; /* Fondo beige para el formulario */
+    background-color: #e9c193; /* Fondo beige oscuro para el formulario */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
     border-radius: 8px;
     box-sizing: border-box;
@@ -40,7 +40,7 @@ form input[type="text"] {
     padding: 10px;
     margin: 8px 0 16px 0;
     display: block;
-    background-color: #f3e3d3; /* Beige claro para los campos de texto */
+    background-color: #fafafa; /* Beige ligeramente oscuro para los campos de texto */
     color: #3b3b3b; /* Gris oscuro para el texto de entrada */
     border: 1px solid #b0a295; /* Borde gris suave */
     border-radius: 4px;
@@ -71,7 +71,7 @@ form button[type="submit"]:hover {
 
 /* Estilos del resultado */
 .resultado {
-    background-color: #f3e3d3; /* Fondo beige claro para la sección de resultados */
+    background-color: #e5c8a2; /* Fondo beige oscuro para la sección de resultados */
     padding: 15px;
     border-radius: 4px;
     color: #333333; /* Texto en gris oscuro */
