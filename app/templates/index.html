@@ -1,7 +1,7 @@
 {% extends './layout.html' %}
 
 {% block title %}
-Index
+Cardiotradamus
 {% endblock %}
 
 {% block body %}
@@ -13,84 +13,83 @@ Index
 <style>
     /* General Styles */
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Times New Roman', Times, serif;
         margin: 0;
         padding: 0;
-        background-color: #e4ded7; /* Fondo de página modificado */
+        background-color: #e4ded7;
     }
 
-    /* Header */
-    .header {
-        background-color: #f1c6a8;
-        padding: 15px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        border-bottom: 1px solid #ddd;
+    /* Main Layout */
+    .layout {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 30px;
+        gap: 20px;
+    }
+
+    /* Image Container */
+    .image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-container img {
+        max-width: 300px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
     }
 
     /* Main Content */
-    .main {
+    .main-content {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-        gap: 20px;
-        text-align: center;
-    }
-
-    .card {
-        background-color: #f1c6a8;
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        width: 100%;
         max-width: 600px;
-        box-sizing: border-box;
     }
 
-    .card h2 {
-        font-size: 32px;
-        font-weight: bold;
-        color: #333;
-        margin: 0;
-    }
-
-    .card p {
-        font-size: 18px;
-        color: #333;
-        margin-top: 10px;
-    }
-
-    /* Info Section */
-    .info-section {
+    .card, .info-section, .purpose-section, .footer {
         background-color: #f1c6a8;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        width: 100%;
         color: #333;
         font-weight: bold;
-        font-size: 18px;
         text-align: center;
+        transition: transform 0.3s ease;
+        margin-bottom: 20px; /* Espacio uniforme entre cuadros */
     }
 
-    /* Footer */
-    .footer {
-        background-color: #f1c6a8;
-        padding: 15px;
-        text-align: center;
-        border-radius: 8px;
-        max-width: 600px;
-        width: 100%;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
+    /* Hover Effects */
+    .card:hover, .info-section:hover, .purpose-section:hover, .footer:hover {
+        transform: scale(1.05);
+    }
+
+    .card h2 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 32px;
+        margin: 0;
+    }
+
+    .card p {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .info-section {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18px;
+    }
+
+    .purpose-section {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 16px;
     }
 
     .footer a {
+        font-family: Georgia, 'Times New Roman', Times, serif;
         text-decoration: none;
         color: #333;
         font-weight: bold;
@@ -102,33 +101,44 @@ Index
     .footer a:hover {
         background-color: #e9b894;
     }
-
-    .image-container img {
-        width: 100%;
-        max-width: 400px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
 </style>
 </head>
 <body>
 
-<!-- Main Content -->
-<div class="main">
-    <!-- CARDIODAMUS Card -->
-    <div class="card">
-        <h2>CARDIODAMUS</h2>
-        <p>Tu corazón en las mejores manos</p>
+<!-- Main Layout with Images on Left and Right -->
+<div class="layout">
+    <!-- Left Image Container -->
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/mi-imagen.jpg') }}" alt="Imagen Representativa Izquierda">
     </div>
 
-    <!-- Info Section (text description) -->
-    <div class="info-section">
-        Somos una página en donde podemos dar un resultado de alta probabilidad para saber si tienes problemas cardíacos, en base a los datos que digites en la sección de "Digita tus datos".
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- CARDIODAMUS Card -->
+        <div class="card">
+            <h2>CARDIODAMUS</h2>
+            <p>Tu corazón en las mejores manos</p>
+        </div>
+
+        <!-- Info Section (text description) -->
+        <div class="info-section">
+            Somos una página en donde podemos dar un resultado de alta probabilidad para saber si tienes problemas cardíacos, en base a los datos que digites en la sección de "Digita tus datos".
+        </div>
+
+        <!-- New Purpose Section -->
+        <div class="purpose-section">
+            Este sitio está diseñado para ayudarte a comprender mejor tu salud cardíaca. Proporcionamos predicciones basadas en datos y brindamos recomendaciones personalizadas para que puedas tomar decisiones informadas.
+        </div>
+
+        <!-- Digita tus datos (footer link) -->
+        <div class="footer">
+            <a href="{{ url_for('predicciones') }}">Digita tus datos</a>
+        </div>
     </div>
 
-    <!-- Digita tus datos (footer link) -->
-    <div class="footer">
-        <a href="{{ url_for('predicciones') }}">Digita tus datos</a>
+    <!-- Right Image Container -->
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/mi-imagen2.jpg') }}" alt="Imagen Representativa Derecha">
     </div>
 </div>
 

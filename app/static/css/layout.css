@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #e4ded7; /* Fondo gris claro */
     color: #000000; /* Texto negro */
     margin: 0;
@@ -71,7 +71,7 @@ form button[type="submit"]:hover {
 
 /* Estilos del resultado */
 .resultado {
-    background-color: #e5c8a2; /* Fondo beige oscuro para la sección de resultados */
+    background-color: #ffffff; /* Fondo beige oscuro para la sección de resultados */
     padding: 15px;
     border-radius: 4px;
     color: #333333; /* Texto en gris oscuro */
